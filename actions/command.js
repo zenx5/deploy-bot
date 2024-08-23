@@ -22,7 +22,7 @@ export const installDependencies = async () => {
 
 export const build = async () => {
     try {
-        const response = await execute(`cd ${process.env.DIRPATH} && pnpm build`);
+        const response = await execute(`cd ${process.env.DIRPATH} && pnpm run build`);
         return { error: false, message: response }
     }catch (error) {
         console.log( error );

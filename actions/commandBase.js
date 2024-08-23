@@ -15,3 +15,12 @@ export const execute = async (command) => {
         });
     })
 }
+
+export const command = async () => {
+    try {
+        const response = await execute(`cd ${process.env.DIRPATH} && git pull`);
+        return { error: false, message: response }
+    }catch (error) {
+        return { error: true, message: error };
+    }
+}

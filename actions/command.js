@@ -1,42 +1,18 @@
-import { execute } from "./commandBase.js";
+import { command, execute } from "./commandBase.js";
 
 export const getPull = async () => {
-    try {
-        const response = await execute(`cd ${process.env.DIRPATH} && git pull`);
-        return { error: false, message: response }
-    }catch (error) {
-        console.log( error );
-        return { error: true, message: error };
-    }
+    return await command(`cd ${process.env.DIRPATH} && git pull -S`);
 }
 
 export const installDependencies = async () => {
-    try {
-        const response = await execute(`cd ${process.env.DIRPATH} && pnpm install`);
-        return { error: false, message: response }
-    }catch (error) {
-        console.log( error );
-        return { error: true, message: error };
-    }
+    return await command(`cd ${process.env.DIRPATH} && pnpm install`);
 }
 
 export const build = async () => {
-    try {
-        const response = await execute(`cd ${process.env.DIRPATH} && pnpm run build`);
-        return { error: false, message: response }
-    }catch (error) {
-        console.log( error );
-        return { error: true, message: error };
-    }
+    return await execute(`cd ${process.env.DIRPATH} && pnpm run build`);
 }
 
 export const restartServer = async () => {
-    try {
-        const response = await execute(`echo "${process.env.SUDO_PASSWORD}" | sudo -S nginx -t && echo "${process.env.SUDO_PASSWORD}" | sudo -S systemctl restart nginx`);
-        return { error: false, message: response }
-    }catch (error) {
-        console.log( error );
-        return error;
-    }
+    return await execute(`echo "${process.env.SUDO_PASSWORD}" | sudo -S nginx -t && echo "${process.env.SUDO_PASSWORD}" | sudo -S systemctl restart nginx`);
 }
 

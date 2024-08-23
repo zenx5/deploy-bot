@@ -6,6 +6,10 @@ import { getPull, installDependencies, build, restartServer } from "./actions/co
 
 const bot = new Bot(process.env.NODE_BOT_TOKEN)
 
+bot.command("info", (ctx) => {
+    ctx.reply("This bot is a simple bot that allows you to deploy your project with a single command")
+})
+
 bot.command("deploy", async (ctx) => {
     const {error:errorpull, message:messagepull } = await getPull()
     if( errorpull ) return ctx.reply("Error pulling from git \n "+messagepull)
